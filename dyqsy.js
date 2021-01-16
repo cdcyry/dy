@@ -1,6 +1,29 @@
-//重写匹配地址:amemv.com/aweme/v1/aweme/post
+//重写匹配地址:core-c-hl.amemv.com/aweme/v1/aweme/post
 //QuanX重写配置:amemv.com/aweme/v1/aweme/post url script-response-body https://gitee.com/passerby-b/javascript/raw/master/dywm.js
 //MITM:*.amemv.com
 //需要到作者的作品列表里找到那个视频再下载
-
-eval(function(p,a,c,k,e,r){e=function(c){return c.toString(36)};if('0'.replace(0,e)==0){while(c--)r[e(c)]=k[c];k=[function(e){return r[e]||e}];e=function(){return'[2-9abdf-hj]'};c=1};while(c--)if(k[c])p=p.replace(new RegExp('\\b'+e(c)+'\\b','g'),k[c]);return p}('4.5("🍎抖音去水印脚本开始!");8 3=$response.3;d{f($request.url.indexOf("amemv.com/g/v1/g/post")>-1&&!!3){8 2=h.parse(3);for(8 i=0;i<2.6.length;i++){8 7=2.6[i].9.7.a;2.6[i].9.download_addr.a=7;f(!!2.6[i].9.j.a){2.6[i].9.j.a=7}4.5("🍎播放地址:"+7)}$b({3:h.stringify(2)})}else{4.5("🍎🍎3为空");$b({})}}catch(e){4.5("🍎🍎🍎🍎d错误:"+e);$b({})}4.5("执行完成!!!!");',[],20,'||obj|body|console|log|aweme_list|play_addr|var|video|url_list|done||try||if|aweme|JSON||download_suffix_logo_addr'.split('|'),0,{}))
+ 
+console.log("&#127822;抖音去水印脚本开始!");
+var body = $response.body;
+var $tool = tool();
+try {
+    if ($request.url.indexOf("amemv.com/aweme/v1/aweme/post") > -1 && !!body) {
+        var obj = $tool.str2json(body);
+        for (var i = 0; i < obj.aweme_list.length; i++) {
+            var play_addr = obj.aweme_list[i].video.play_addr.url_list;
+            obj.aweme_list[i].video.download_addr.url_list = play_addr;
+            console.log("&#127822;播放地址:" + play_addr);
+        }
+        $done({ body: $tool.json2str(obj) });
+    }
+    else {
+        $done({});
+    }
+} catch (e) {
+    console.log("&#127822;try错误:" + e);
+    $tool.notify('try错误!', 'try错误:', e);
+    $done({});
+}
+console.log("执行完成!!!!");
+ 
+function tool(){var a=typeof $httpClient!="undefined";var b=typeof $task!="undefined";var c={notify:function(i,f,h,g){var e={};if(b){if(!!g){if(typeof g=="string"){e["open-url"]=g}if(!!g.url){e["open-url"]=g.url}if(!!g.img){e["media-url"]=g.img}$notify(i,f,h,e)}else{$notify(i,f,h)}}if(a){if(!!g){if(typeof g=="string"){e["openUrl"]=g}if(!!g.url){e["openUrl"]=g.url}if(!!g.img){e["mediaUrl"]=g.img}$notification.post(i,f,h,e)}else{$notification.post(i,f,h)}}},get:function(e,f){if(b){if(typeof e=="string"){e={url:e}}e["method"]="GET";$task.fetch(e).then(function(g){f(null,d(g),g.body)},function(g){f(g.error,null,null)})}if(a){$httpClient.get(e,function(i,h,g){f(i,d(h),g)})}},post:function(e,f){if(b){if(typeof e=="string"){e={url:e}}e["method"]="POST";$task.fetch(e).then(function(g){f(null,d(g),g.body)},function(g){f(g.error,null,null)})}if(a){$httpClient.post(e,function(i,h,g){f(i,d(h),g)})}},unicode:function(e){return unescape(e.replace(/\\u/gi,"%u"))},decodeurl:function(e){return decodeURIComponent(e)},json2str:function(e){return JSON.stringify(e)},str2json:function(e){return JSON.parse(e)},setkeyval:function(f,e){if(b){$prefs.setValueForKey(f,e)}if(a){$persistentStore.write(f,e)}},getkeyval:function(e){if(b){return $prefs.valueForKey(e)}if(a){return $persistentStore.read(e)}}};function d(e){if(e){if(e.status){e["statusCode"]=e.status}else{if(e.statusCode){e["status"]=e.statusCode}}}return e}return c};
